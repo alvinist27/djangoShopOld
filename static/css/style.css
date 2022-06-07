@@ -3,9 +3,29 @@ nav {
     margin: 10px;
 }
 
+h2 {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 img {
     margin-right: 10px;
     margin-left: 10px;
+}
+
+.container img {
+    width: 98%;
+    height: 98%;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.type {
+    text-align: center;
+    margin: 5px;
+    padding: 5px;
+    display: block;
 }
 
 .btn {
@@ -31,4 +51,8 @@ footer {
 
 .container span {
     color: white;
+}
+
+#main {
+    padding: 10px;
 }

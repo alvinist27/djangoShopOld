@@ -15,7 +15,7 @@
 </head>
 <body>
     {% block nav %}
-        {% include './navbar.html' %}
+        {% include 'block/navbar.html' %}<hr>
     {% endblock %}
 
     {% block content %}
@@ -23,7 +23,7 @@
     {% endblock %}
 
     {% block footer %}
-
+        {% include 'block/footer.html' %}
     {% endblock %}
 </body>
 </html>

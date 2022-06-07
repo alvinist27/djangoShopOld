@@ -17,3 +17,18 @@ img {
     margin-left: auto;
     margin-right: 0;
 }
+
+footer {
+    position: absolute;
+    width: 100%;
+    background-color: #ff8400;
+    padding: 10px;
+}
+
+.container {
+    padding: 10px;
+}
+
+.container span {
+    color: white;
+}

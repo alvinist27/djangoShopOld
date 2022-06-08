@@ -14,16 +14,18 @@
     {% block title %}<title>.shop - Магазин одежды</title>{% endblock %}
 </head>
 <body>
-    {% block nav %}
-        {% include 'block/navbar.html' %}<hr>
-    {% endblock %}
+    <div id="page">
+        {% block nav %}
+            {% include 'block/navbar.html' %}<hr>
+        {% endblock %}
 
-    {% block content %}
+        {% block content %}
 
-    {% endblock %}
+        {% endblock %}
 
-    {% block footer %}
-        {% include 'block/footer.html' %}
-    {% endblock %}
+        {% block footer %}
+            {% include 'block/footer.html' %}
+        {% endblock %}
+    </div>
 </body>
 </html>

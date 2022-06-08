@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 
 class AuthForm(AuthenticationForm):
     username = forms.CharField(max_length=80, required=True)
-    email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
 
 

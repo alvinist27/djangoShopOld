@@ -22,3 +22,15 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+
+class UpdateUserForm(forms.ModelForm):
+    username = forms.CharField(max_length=80, required=True,
+                               label='Имя пользователя')
+    email = forms.EmailField(label='Email адрес')
+    first_name = forms.CharField(max_length=150, label='Имя')
+    last_name = forms.CharField(max_length=150, label='Фамилия')
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name')

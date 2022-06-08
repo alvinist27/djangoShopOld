@@ -56,3 +56,9 @@ footer {
 #main {
     padding: 10px;
 }
+
+#sub {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}

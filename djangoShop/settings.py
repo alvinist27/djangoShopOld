@@ -57,6 +57,7 @@ MIDDLEWARE = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ROOT_URLCONF = 'djangoShop.urls'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 TEMPLATES = [
     {

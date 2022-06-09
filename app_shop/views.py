@@ -5,3 +5,8 @@ from django.views import View
 class MainView(View):
     def get(self, request):
         return render(request, 'app_shop/index.html')
+
+
+class AboutView(View):
+    def get(self, request):
+        return render(request, 'app_shop/about.html')

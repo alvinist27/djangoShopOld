@@ -18,5 +18,5 @@ class Clothes(models.Model):
 
 
 class Image(models.Model):
-    clothes = models.ForeignKey(Clothes, on_delete=models.CASCADE)
+    clothes = models.ForeignKey(Clothes, on_delete=models.CASCADE, related_name='images')
     images = models.ImageField(upload_to='images', verbose_name='Фото')

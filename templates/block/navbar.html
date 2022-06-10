@@ -17,10 +17,10 @@
                     Одежда
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Мужская</a></li>
-                    <li><a class="dropdown-item" href="#">Женская</a></li>
+                    <li><a class="dropdown-item" href="{% url 'men' %}">Мужская</a></li>
+                    <li><a class="dropdown-item" href="{% url 'women' %}">Женская</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Детская</a></li>
+                    <li><a class="dropdown-item" href="{% url 'child' %}">Детская</a></li>
                 </ul>
             </li>
         </ul>

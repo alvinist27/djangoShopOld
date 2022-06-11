@@ -215,3 +215,12 @@ img:hover {
 	width: 80%;
 	padding: 10px;
 }
+
+#new_discount {
+	color: #9b9999;
+	text-decoration: line-through;
+}
+
+#new_cost {
+	color: #ff8400;
+}

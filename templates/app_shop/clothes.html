@@ -18,10 +18,14 @@
                 <p>Размеры: {{ item.first.size }}</p>
 
                 {% if item.first.discount > 0 %}
-                    <h4><span id="discount">{{ item.first.price }} ₽</span> <span id="cost_calc">{{ item.first.price|sub:item.first.discount }} ₽</span></h4>
+                    <h4 id="new_discount">{{ item.first.price }} ₽</h4>
+                    <h4 id="new_cost">{{ item.first.price|sub:item.first.discount }} ₽</h4>
                 {% else %}
-                    <h4 id="cost">{{ item.first.price }} ₽</h4>
+                    <h4 id="new_cost">{{ item.first.price }} ₽</h4>
                 {% endif %}
+                <div class="cart">
+                    <button type="submit" class="btn">В корзину</button>
+                </div>
             </div>
         </div>
 {% endblock %}

@@ -93,6 +93,11 @@ footer {
 	min-width: 100px;
 }
 
+.product-text a {
+	text-decoration: none;
+	color: #474747;
+}
+
 .products {
 	list-style: none;
 	margin: 0 -20px 0 0;
@@ -127,7 +132,6 @@ footer {
 	padding: 2px;
 	overflow: hidden;
 	text-align: center;
-
 }
 
 #cost {
@@ -169,11 +173,6 @@ img:hover {
 .cut {
 	white-space: nowrap;
 	text-overflow: ellipsis;
-}
-.cut:hover{
-	white-space: normal;
-	text-overflow: initial;
-	overflow: hidden;
 }
 
 .new_container {
@@ -229,4 +228,9 @@ img:hover {
 .col-5 {
 	margin-left: auto;
 	margin-right: auto;
+}
+
+ button img{
+	width: 10%;
+	height: 10%;
 }

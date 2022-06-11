@@ -16,19 +16,22 @@ class AboutView(View):
 class ClothesMenView(View):
     def get(self, request):
         clothes = Clothes.objects.filter(type='Мужская')[::-1]
-        return render(request, 'app_shop/clothes_men.html', {'clothes': clothes})
+        return render(request, 'app_shop/clothes_list.html',
+                      {'name': 'Мужская одежда', 'clothes': clothes})
 
 
 class ClothesWomenView(View):
     def get(self, request):
         clothes = Clothes.objects.filter(type='Женская')[::-1]
-        return render(request, 'app_shop/clothes_women.html', {'clothes': clothes})
+        return render(request, 'app_shop/clothes_list.html',
+                      {'name': 'Женская одежда', 'clothes': clothes})
 
 
 class ClothesChildView(View):
     def get(self, request):
         clothes = Clothes.objects.filter(type='Детская')[::-1]
-        return render(request, 'app_shop/clothes_child.html', {'clothes': clothes})
+        return render(request, 'app_shop/clothes_list.html',
+                      {'name': 'Детская одежда', 'clothes': clothes})
 
 
 class ClothesView(View):

@@ -180,3 +180,13 @@ img:hover {
 	transform: scale(1.05);
 	transition-duration: 1s, 1s;
 }
+
+.cut {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.cut:hover{
+	white-space: normal;
+	text-overflow: initial;
+	overflow: hidden;
+}

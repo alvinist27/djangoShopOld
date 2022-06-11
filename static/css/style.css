@@ -14,13 +14,6 @@ img {
     margin-left: 10px;
 }
 
-.container img {
-    width: 98%;
-    height: 98%;
-    margin-right: 0px;
-    margin-left: 0px;
-}
-
 .type {
     text-align: center;
     margin: 5px;
@@ -49,14 +42,6 @@ footer {
     background-color: #ff8400;
     padding: 10px;
     margin-top: auto;
-}
-
-.container {
-    padding: 10px;
-}
-
-.container span {
-    color: white;
 }
 
 #main {
@@ -191,9 +176,25 @@ img:hover {
 	overflow: hidden;
 }
 
-.container {
+.new_container {
   	display: flex;
 	text-align: left;
+	padding: 10px;
+}
+
+.container {
+    padding: 10px;
+}
+
+.container span {
+    color: white;
+}
+
+.container img, .new_container img {
+    width: 98%;
+    height: 98%;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 #col1 {
@@ -223,4 +224,9 @@ img:hover {
 
 #new_cost {
 	color: #ff8400;
+}
+
+.col-5 {
+	margin-left: auto;
+	margin-right: auto;
 }

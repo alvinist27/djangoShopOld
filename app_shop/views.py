@@ -29,3 +29,9 @@ class ClothesChildView(View):
     def get(self, request):
         clothes = Clothes.objects.filter(type='Детская')[::-1]
         return render(request, 'app_shop/clothes_child.html', {'clothes': clothes})
+
+
+class ClothesView(View):
+    def get(self, request, id):
+        item = Clothes.objects.filter(id=id)
+        return render(request, 'app_shop/clothes.html', {'item': item})

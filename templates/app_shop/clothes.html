@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block title %}<title>.shop - Магазин одежды</title>
+{% endblock %}
+{% block content %}
+        <div class="container">
+            <div id="col1">
+                <img src="/{{ item.first.images.first.images }}" alt="Photo">
+            </div>
+            <div id="col2">
+                <h2>{{ item.first.title }}</h2>
+
+                <p>{{ item.first.description }}</p>
+                <p>Для кого: {{ item.first.type }}</p>
+                <p>Тип: {{ item.first.group }}</p>
+                <p>Размеры: {{ item.first.size }}</p>
+
+                {% if item.first.discount > 0 %}
+                    <h4><span id="discount">{{ item.first.price }} ₽</span> <span id="cost_calc">{{ item.first.price|sub:item.first.discount }} ₽</span></h4>
+                {% else %}
+                    <h4 id="cost">{{ item.first.price }} ₽</h4>
+                {% endif %}
+            </div>
+        </div>
+{% endblock %}

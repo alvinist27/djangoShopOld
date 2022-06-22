@@ -21,9 +21,49 @@ img {
     display: block;
 }
 
+.choice {
+  	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	padding-bottom: 20px;
+}
+
+.choice input[type=radio] {
+   position: absolute;
+   left: -99999px;
+}
+
+.choice span {
+  	display: block;
+  	padding: 0.2em 1em;
+  	margin-right: 1px;
+  	cursor: pointer;
+	color: #1b1b1b;
+}
+
+.choice input[type=radio]:checked + span, label, button {
+	color: #FF8400FF;
+}
+
+.choice input[type=radio]:hover + span, label, button {
+	color: white;
+}
+
 .btn {
-    background-color: #FF8400FF !important;
+    background-color: #FF8400FF!important;
     color: white!important;
+}
+
+.btn-outline {
+    background-color: white!important;
+    color: #FF8400FF!important;
+	border: 1px #FF8400FF;
+}
+
+.btn-outline:hover {
+	color: white!important;
+	background-color: #FF8400FF!important;
 }
 
 .buttons {

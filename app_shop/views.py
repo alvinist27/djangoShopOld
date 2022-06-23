@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from .models import Clothes
+from .forms import RadioForm
 
 
 class MainView(View):
@@ -15,23 +16,26 @@ class AboutView(View):
 
 class ClothesMenView(View):
     def get(self, request):
+        form = RadioForm()
         clothes = Clothes.objects.filter(type='Мужская')[::-1]
         return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Мужская одежда', 'clothes': clothes})
+                      {'name': 'Мужская одежда', 'clothes': clothes, 'form': form})
 
 
 class ClothesWomenView(View):
     def get(self, request):
+        form = RadioForm()
         clothes = Clothes.objects.filter(type='Женская')[::-1]
         return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Женская одежда', 'clothes': clothes})
+                      {'name': 'Женская одежда', 'clothes': clothes, 'form': form})
 
 
 class ClothesChildView(View):
     def get(self, request):
+        form = RadioForm()
         clothes = Clothes.objects.filter(type='Детская')[::-1]
         return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Детская одежда', 'clothes': clothes})
+                      {'name': 'Детская одежда', 'clothes': clothes, 'form': form})
 
 
 class ClothesView(View):

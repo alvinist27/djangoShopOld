@@ -15,6 +15,7 @@ class Clothes(models.Model):
     price = models.IntegerField(verbose_name='Цена')
     size = models.CharField(max_length=10, verbose_name='Размер')
     discount = models.IntegerField(verbose_name='Скидка')
+    is_available = models.BooleanField(verbose_name='В наличии', default=True)
 
 
 class Image(models.Model):

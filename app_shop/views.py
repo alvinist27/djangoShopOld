@@ -15,6 +15,25 @@ class AboutView(View):
         return render(request, 'app_shop/about.html')
 
 
+def get_clothes_list(select, type):
+    if select == '2':
+        clothes = Clothes.objects.filter(
+            Q(type=type) & (Q(group='Куртка') | Q(group='Пальто') | Q(group='Шуба') | Q(group='Жилет')))[::-1]
+    elif select == '3':
+        clothes = Clothes.objects.filter(Q(type=type) & (Q(group='Майка') | Q(group='Футболка')))[::-1]
+    elif select == '4':
+        clothes = Clothes.objects.filter(
+            Q(type=type) & (Q(group='Толстовка') | Q(group='Худи') | Q(group='Кофта')))[::-1]
+    elif select == '5':
+        clothes = Clothes.objects.filter(
+            Q(type=type) & (Q(group='Штаны') | Q(group='Брюки') | Q(group='Джинсы')))[::-1]
+    elif select == '6':
+        clothes = Clothes.objects.filter(Q(type=type) & (Q(group='Кроссовки') | Q(group='Сапоги')))[::-1]
+    else:
+        clothes = Clothes.objects.filter(type=type)[::-1]
+    return clothes
+
+
 class ClothesMenView(View):
     def get(self, request):
         form = RadioForm()
@@ -26,18 +45,7 @@ class ClothesMenView(View):
         form = RadioForm(request.POST)
         if form.is_valid():
             select = form.cleaned_data.get('select')
-            if select == '2':
-                clothes = Clothes.objects.filter(Q(type='Мужская') & (Q(group='Куртка') | Q(group='Пальто') | Q(group='Жилет')))[::-1]
-            elif select == '3':
-                clothes = Clothes.objects.filter(Q(type='Мужская') & (Q(group='Майка') | Q(group='Футболка')))[::-1]
-            elif select == '4':
-                clothes = Clothes.objects.filter(Q(type='Мужская') & (Q(group='Толстовка') | Q(group='Худи') | Q(group='Кофта')))[::-1]
-            elif select == '5':
-                clothes = Clothes.objects.filter(Q(type='Мужская') & (Q(group='Штаны') | Q(group='Брюки') | Q(group='Джинсы')))[::-1]
-            elif select == '6':
-                clothes = Clothes.objects.filter(Q(type='Мужская') & (Q(group='Кроссовки') | Q(group='Сапоги')))[::-1]
-            else:
-                clothes = Clothes.objects.filter(type='Мужская')[::-1]
+            clothes = get_clothes_list(select, 'Мужская')
         return render(request, 'app_shop/clothes_list.html',
                       {'name': 'Мужская одежда', 'clothes': clothes, 'form': form})
 
@@ -53,18 +61,7 @@ class ClothesWomenView(View):
         form = RadioForm(request.POST)
         if form.is_valid():
             select = form.cleaned_data.get('select')
-            if select == '2':
-                clothes = Clothes.objects.filter(Q(type='Женская') & (Q(group='Куртка') | Q(group='Шуба') | Q(group='Пальто') | Q(group='Жилет')))[::-1]
-            elif select == '3':
-                clothes = Clothes.objects.filter(Q(type='Женская') & (Q(group='Майка') | Q(group='Футболка')))[::-1]
-            elif select == '4':
-                clothes = Clothes.objects.filter(Q(type='Женская') & (Q(group='Толстовка') | Q(group='Худи') | Q(group='Кофта')))[::-1]
-            elif select == '5':
-                clothes = Clothes.objects.filter(Q(type='Женская') & (Q(group='Штаны') | Q(group='Брюки') | Q(group='Джинсы')))[::-1]
-            elif select == '6':
-                clothes = Clothes.objects.filter(Q(type='Женская') & (Q(group='Кроссовки') | Q(group='Сапоги')))[::-1]
-            else:
-                clothes = Clothes.objects.filter(type='Женская')[::-1]
+            clothes = get_clothes_list(select, 'Женская')
         return render(request, 'app_shop/clothes_list.html',
                       {'name': 'Женская одежда', 'clothes': clothes, 'form': form})
 
@@ -80,18 +77,7 @@ class ClothesChildView(View):
         form = RadioForm(request.POST)
         if form.is_valid():
             select = form.cleaned_data.get('select')
-            if select == '2':
-                clothes = Clothes.objects.filter(Q(type='Детская') & (Q(group='Куртка') | Q(group='Пальто') | Q(group='Жилет')))[::-1]
-            elif select == '3':
-                clothes = Clothes.objects.filter(Q(type='Детская') & (Q(group='Майка') | Q(group='Футболка')))[::-1]
-            elif select == '4':
-                clothes = Clothes.objects.filter(Q(type='Детская') & (Q(group='Толстовка') | Q(group='Худи') | Q(group='Кофта')))[::-1]
-            elif select == '5':
-                clothes = Clothes.objects.filter(Q(type='Детская') & (Q(group='Штаны') | Q(group='Брюки') | Q(group='Джинсы')))[::-1]
-            elif select == '6':
-                clothes = Clothes.objects.filter(Q(type='Детская') & (Q(group='Кроссовки') | Q(group='Сапоги')))[::-1]
-            else:
-                clothes = Clothes.objects.filter(type='Детская')[::-1]
+            clothes = get_clothes_list(select, 'Детская')
         return render(request, 'app_shop/clothes_list.html',
                       {'name': 'Детская одежда', 'clothes': clothes, 'form': form})
 

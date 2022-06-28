@@ -35,61 +35,52 @@ def get_clothes_list(select, type):
     return clothes
 
 
-class ClothesMenView(View):
-    def get(self, request):
+def сlothes_men_view(request):
+    if request.method == 'GET':
         form = RadioForm()
         clothes = Clothes.objects.filter(type='Мужская')[::-1]
-        paginator = Paginator(clothes, 12)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Мужская одежда', 'clothes': page_obj, 'form': form})
-
-    def post(self, request):
+    elif request.method == 'POST':
         form = RadioForm(request.POST)
         if form.is_valid():
             select = form.cleaned_data.get('select')
             clothes = get_clothes_list(select, 'Мужская')
-        return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Мужская одежда', 'clothes': clothes, 'form': form})
+    paginator = Paginator(clothes, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'app_shop/clothes_list.html',
+                  {'name': 'Мужская одежда', 'clothes': page_obj, 'form': form})
 
 
-class ClothesWomenView(View):
-    def get(self, request):
+def сlothes_women_view(request):
+    if request.method == 'GET':
         form = RadioForm()
         clothes = Clothes.objects.filter(type='Женская')[::-1]
-        paginator = Paginator(clothes, 12)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Женская одежда', 'clothes': page_obj, 'form': form})
-
-    def post(self, request):
+    elif request.method == 'POST':
         form = RadioForm(request.POST)
         if form.is_valid():
             select = form.cleaned_data.get('select')
             clothes = get_clothes_list(select, 'Женская')
-        return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Женская одежда', 'clothes': clothes, 'form': form})
+    paginator = Paginator(clothes, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'app_shop/clothes_list.html',
+                  {'name': 'Женская одежда', 'clothes': page_obj, 'form': form})
 
 
-class ClothesChildView(View):
-    def get(self, request):
+def сlothes_child_view(request):
+    if request.method == 'GET':
         form = RadioForm()
         clothes = Clothes.objects.filter(type='Детская')[::-1]
-        paginator = Paginator(clothes, 12)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Детская одежда', 'clothes': page_obj, 'form': form})
-
-    def post(self, request):
+    elif request.method == 'POST':
         form = RadioForm(request.POST)
         if form.is_valid():
             select = form.cleaned_data.get('select')
             clothes = get_clothes_list(select, 'Детская')
-        return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Детская одежда', 'clothes': clothes, 'form': form})
+    paginator = Paginator(clothes, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'app_shop/clothes_list.html',
+                  {'name': 'Детская одежда', 'clothes': page_obj, 'form': form})
 
 
 class ClothesView(View):

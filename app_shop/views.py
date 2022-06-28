@@ -86,3 +86,13 @@ class ClothesView(View):
     def get(self, request, id):
         item = Clothes.objects.filter(id=id)
         return render(request, 'app_shop/clothes.html', {'item': item})
+
+
+class SearchResults(View):
+    def get(self, request):
+        clothes = ''
+        query = self.request.GET.get('q')
+        if query:
+            clothes = Clothes.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+
+        return render(request, 'app_shop/search.html',{'clothes': clothes})

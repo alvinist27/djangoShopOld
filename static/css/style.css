@@ -262,12 +262,57 @@ img:hover {
 	margin-right: auto;
 }
 
- button img{
+button img{
 	width: 10%;
 	height: 10%;
 }
 
+#search {
+	padding: 20px;
+}
 
- #search {
-	 padding: 20px;
- }
+.pagination {
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 10px;
+}
+
+.label
+{
+    color: #FF8400FF!important;
+}
+
+.label .active
+{
+    color: white!important;
+}
+
+.pagination > li > a
+{
+    background-color: white;
+    color: #FF8400FF;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #FF8400FF;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination > .active > a
+{
+    color: white!important;
+    background-color: #FF8400FF!important;
+    border: solid 1px #FF8400FF!important;
+}
+
+.pagination > .active > a:hover
+{
+	color: white;
+    background-color: #FF8400FF!important;
+    border: solid 1px #FF8400FF;
+}

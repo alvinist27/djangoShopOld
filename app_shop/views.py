@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.views import View
 from .models import Clothes
@@ -38,8 +39,11 @@ class ClothesMenView(View):
     def get(self, request):
         form = RadioForm()
         clothes = Clothes.objects.filter(type='Мужская')[::-1]
+        paginator = Paginator(clothes, 12)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Мужская одежда', 'clothes': clothes, 'form': form})
+                      {'name': 'Мужская одежда', 'clothes': page_obj, 'form': form})
 
     def post(self, request):
         form = RadioForm(request.POST)
@@ -54,8 +58,11 @@ class ClothesWomenView(View):
     def get(self, request):
         form = RadioForm()
         clothes = Clothes.objects.filter(type='Женская')[::-1]
+        paginator = Paginator(clothes, 12)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Женская одежда', 'clothes': clothes, 'form': form})
+                      {'name': 'Женская одежда', 'clothes': page_obj, 'form': form})
 
     def post(self, request):
         form = RadioForm(request.POST)
@@ -70,8 +77,11 @@ class ClothesChildView(View):
     def get(self, request):
         form = RadioForm()
         clothes = Clothes.objects.filter(type='Детская')[::-1]
+        paginator = Paginator(clothes, 12)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         return render(request, 'app_shop/clothes_list.html',
-                      {'name': 'Детская одежда', 'clothes': clothes, 'form': form})
+                      {'name': 'Детская одежда', 'clothes': page_obj, 'form': form})
 
     def post(self, request):
         form = RadioForm(request.POST)
@@ -94,5 +104,7 @@ class SearchResults(View):
         query = self.request.GET.get('q')
         if query:
             clothes = Clothes.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
-
-        return render(request, 'app_shop/search.html',{'clothes': clothes})
+        paginator = Paginator(clothes, 12)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'app_shop/search.html', {'clothes': page_obj, 'count': paginator.count})

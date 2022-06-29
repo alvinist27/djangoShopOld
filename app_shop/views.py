@@ -87,8 +87,9 @@ def сlothes_child_view(request):
 
 class ClothesView(View):
     def get(self, request, id):
-        item = Clothes.objects.filter(id=id)
-        return render(request, 'app_shop/clothes.html', {'item': item})
+        item = Clothes.objects.filter(id=id, is_available=True)
+        form = CartAddProductForm()
+        return render(request, 'app_shop/clothes.html', {'item': item, 'form': form})
 
 
 class SearchResults(View):
@@ -109,20 +110,25 @@ def cart_detail(request):
 
 
 @require_POST
-def cart_add(request, clothes_id):
+def cart_add(request, id):
     cart = Cart(request)
-    clothes = get_object_or_404(Clothes, id=clothes_id)
+    clothes = get_object_or_404(Clothes, id=id)
     form = CartAddProductForm(request.POST)
+    print(clothes)
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(clothes=clothes,
                  quantity=cd['quantity'],
                  update_quantity=cd['update'])
-    return redirect('cart:cart_detail')
+    else:
+        cart.add(clothes=clothes,
+                 quantity=1,
+                 update_quantity=False)
+    return redirect('cart_detail')
 
 
-def cart_remove(request, clothes_id):
+def cart_remove(request, id):
     cart = Cart(request)
-    clothes = get_object_or_404(Clothes, id=clothes_id)
+    clothes = get_object_or_404(Clothes, id=id)
     cart.remove(clothes)
-    return redirect('cart:cart_detail')
+    return redirect('cart_detail')

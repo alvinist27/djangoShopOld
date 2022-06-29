@@ -40,7 +40,11 @@
                             {% else %}
                                 <h4 id="cost">{{ cloth.price }} ₽</h4>
                             {% endif %}
-                            <button class="btn cart"><img src="{% static "/img/icon.png" %}"></button>
+
+                            <form action="{% url "cart_add" cloth.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn cart"><img src="{% static "/img/icon.png" %}"></button>
+                            </form>
                         </div>
                     </div>
                 </div>

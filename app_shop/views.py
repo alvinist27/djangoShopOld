@@ -1,9 +1,11 @@
-from django.core.paginator import Paginator
-from django.shortcuts import render
-from django.views import View
+from .cart import Cart
 from .models import Clothes
-from .forms import RadioForm
+from django.views import View
 from django.db.models import Q
+from .forms import RadioForm, CartAddProductForm
+from django.core.paginator import Paginator
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.decorators.http import require_POST
 
 
 class MainView(View):
@@ -99,3 +101,28 @@ class SearchResults(View):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(request, 'app_shop/search.html', {'clothes': page_obj, 'count': paginator.count})
+
+
+def cart_detail(request):
+    cart = Cart(request)
+    return render(request, 'app_shop/cart/detail.html', {'cart': cart})
+
+
+@require_POST
+def cart_add(request, clothes_id):
+    cart = Cart(request)
+    clothes = get_object_or_404(Clothes, id=clothes_id)
+    form = CartAddProductForm(request.POST)
+    if form.is_valid():
+        cd = form.cleaned_data
+        cart.add(clothes=clothes,
+                 quantity=cd['quantity'],
+                 update_quantity=cd['update'])
+    return redirect('cart:cart_detail')
+
+
+def cart_remove(request, clothes_id):
+    cart = Cart(request)
+    clothes = get_object_or_404(Clothes, id=clothes_id)
+    cart.remove(clothes)
+    return redirect('cart:cart_detail')

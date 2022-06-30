@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.safestring import mark_safe
+from .models import Order
 
 CHOICES = (
     ('1', 'Все товары'),
@@ -20,3 +21,10 @@ class RadioForm(forms.Form):
 class CartAddProductForm(forms.Form):
     quantity = forms.TypedChoiceField(choices=PRODUCT_QUANTITY_CHOICES, coerce=int, label='Количество')
     update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
+
+
+class OrderForm(forms.ModelForm):
+
+    class Meta:
+        model = Order
+        fields = ['first_name', 'last_name', 'email', 'post_index', 'city']

@@ -22,7 +22,7 @@ class ClothesAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderClothInline,]
     list_filter = ['is_paid', 'created', 'updated']
-    list_display = ['id', 'username', 'email']
+    list_display = ['id', 'email']
 
 
 admin.site.register(Clothes, ClothesAdmin)

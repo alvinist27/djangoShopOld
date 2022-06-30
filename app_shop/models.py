@@ -31,7 +31,6 @@ class Image(models.Model):
 
 
 class Order(models.Model):
-    username = models.CharField(max_length=50, verbose_name='Имя')
     first_name = models.CharField(max_length=100, verbose_name='Имя')
     last_name = models.CharField(max_length=100, verbose_name='Фамилия')
     email = models.EmailField(max_length=100, verbose_name='Почта')
@@ -57,7 +56,6 @@ class OrderCloth(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='clothes', verbose_name='Заказ')
     cloth = models.ForeignKey(Clothes, on_delete=models.CASCADE, related_name='order_items', verbose_name='Одежда')
     price = models.IntegerField(verbose_name='Цена')
-    discount = models.IntegerField(verbose_name='Скидка')
     quantity = models.PositiveIntegerField(default=1, verbose_name='Количество')
 
     def __str__(self):

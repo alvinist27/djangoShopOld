@@ -1,8 +1,8 @@
 from .cart import Cart
-from .models import Clothes
+from .models import Clothes, OrderCloth
 from django.views import View
 from django.db.models import Q
-from .forms import RadioForm, CartAddProductForm
+from .forms import RadioForm, CartAddProductForm, OrderForm
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
@@ -132,3 +132,19 @@ def cart_remove(request, id):
     clothes = get_object_or_404(Clothes, id=id)
     cart.remove(clothes)
     return redirect('cart_detail')
+
+
+def order_create(request):
+    cart = Cart(request)
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            for cloth in cart:
+                OrderCloth.objects.create(order=order, cloth=cloth['clothes'],
+                    price=cloth['total_price'], quantity=cloth['quantity'])
+            cart.clear()
+            return render(request, 'app_shop/cart/created.html', {'order': order})
+    else:
+        form = OrderForm()
+    return render(request, 'app_shop/cart/create.html', {'cart': cart, 'form': form})

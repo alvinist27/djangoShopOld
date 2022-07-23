@@ -1,4 +1,7 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.contrib.auth.models import User
+
 
 CHOICES = {
     ('Мужская', 'Мужская'),
@@ -63,3 +66,18 @@ class OrderCloth(models.Model):
 
     def get_cost(self):
         return (self.price - self.discount) * self.quantity
+
+
+class ClothesReview(models.Model):
+    username = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='user', verbose_name='Пользователь')
+    clothes = models.ForeignKey(Clothes, on_delete=models.DO_NOTHING, related_name='cloth', verbose_name='Товар')
+    review_text = models.TextField(blank=True, null=True, verbose_name='Текст отзыва')
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], verbose_name='Оценка')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
+
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
+
+    def __str__(self):
+        return f'{self.id}'

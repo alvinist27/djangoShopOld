@@ -382,3 +382,17 @@ button img{
 	margin-left: auto;
 	margin-top: 10px;
 }
+
+.reviews .container {
+    border: 2px solid #FF8400FF;
+    background-color: white;
+    border-radius: 20px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.reviews .container::after {
+    content: "";
+    clear: both;
+    display: table;
+}

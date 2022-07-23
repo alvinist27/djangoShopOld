@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.safestring import mark_safe
-from .models import Order
+from .models import Order, ClothesReview
 
 CHOICES = (
     ('1', 'Все товары'),
@@ -8,7 +8,7 @@ CHOICES = (
     ('3', 'Футболки'),
     ('4', 'Толстовки'),
     ('5', 'Штаны'),
-    ('6', 'Аксессуары')
+    ('6', 'Аксессуары'),
 )
 
 PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 21)]
@@ -28,3 +28,10 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['first_name', 'last_name', 'email', 'post_index', 'city']
+
+
+class ReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = ClothesReview
+        fields = ['review_text', 'rating']

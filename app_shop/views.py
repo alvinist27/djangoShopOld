@@ -1,8 +1,8 @@
 from .cart import Cart
-from .models import Clothes, OrderCloth
+from .models import Clothes, OrderCloth, ClothesReview
 from django.views import View
 from django.db.models import Q
-from .forms import RadioForm, CartAddProductForm, OrderForm
+from .forms import RadioForm, CartAddProductForm, OrderForm, ReviewForm
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
@@ -85,11 +85,19 @@ def сlothes_child_view(request):
                   {'name': 'Детская одежда', 'clothes': page_obj, 'form': form})
 
 
-class ClothesView(View):
-    def get(self, request, id):
-        item = Clothes.objects.filter(id=id, is_available=True)
-        form = CartAddProductForm()
-        return render(request, 'app_shop/clothes.html', {'item': item, 'form': form})
+def clothes_view(request, id):
+    item = Clothes.objects.filter(id=id, is_available=True).first()
+    form = CartAddProductForm()
+    if request.method == 'GET':
+        review = ReviewForm()
+    elif request.method == 'POST':
+        clothes = ClothesReview(username=request.user, clothes=item)
+        review = ReviewForm(request.POST, instance=clothes)
+        if review.is_valid():
+            review.save()
+    review_list = ClothesReview.objects.filter(clothes=id)
+    return render(request, 'app_shop/clothes.html', {'item': item, 'form': form, 'review': review,
+                                                     'review_list': review_list})
 
 
 class SearchResults(View):

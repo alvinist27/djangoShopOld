@@ -96,8 +96,12 @@ def clothes_view(request, id):
         if review.is_valid():
             review.save()
     review_list = ClothesReview.objects.filter(clothes=id)
+    if review_list:
+        rating = sum([i[0] for i in list(review_list.values_list('rating'))]) / len(review_list)
+    else:
+        rating = 'Нет оценок'
     return render(request, 'app_shop/clothes.html', {'item': item, 'form': form, 'review': review,
-                                                     'review_list': review_list})
+                                                     'review_list': review_list, 'rating': rating})
 
 
 class SearchResults(View):
